@@ -46,5 +46,4 @@ O principal objetivo deste projeto é tornar o aprendizado da Química mais aces
 
 ---
 
-## Demonstração
 
