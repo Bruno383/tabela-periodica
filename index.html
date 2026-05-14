@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tabela Periódica Completa</title>
+
+<style>
+
+body{
+    margin:0;
+    padding:20px;
+    background:#0f172a;
+    font-family:Arial;
+    color:white;
+    text-align:center;
+}
+
+h1{
+    margin-bottom:20px;
+}
+
+.tabela{
+    display:grid;
+    grid-template-columns:repeat(18, 70px);
+    gap:5px;
+    justify-content:center;
+}
+
+.elemento{
+    width:70px;
+    height:70px;
+    border-radius:10px;
+    padding:5px;
+    box-sizing:border-box;
+    transition:0.2s;
+    cursor:pointer;
+}
+
+.elemento:hover{
+    transform:scale(1.08);
+    box-shadow:0 0 10px rgba(255,255,255,0.5);
+}
+
+.numero{
+    font-size:11px;
+    text-align:left;
+}
+
+.simbolo{
+    font-size:22px;
+    font-weight:bold;
+}
+
+.nome{
+    font-size:9px;
+}
+
+/* cores */
+
+.nao-metal{ background:#16a34a; }
+.gas-nobre{ background:#9333ea; }
+.metal-alcalino{ background:#ea580c; }
+.metal-alcalino-terroso{ background:#f59e0b; }
+.metaloide{ background:#0f766e; }
+.halogenio{ background:#dc2626; }
+.metal-transicao{ background:#2563eb; }
+.lantanideo{ background:#db2777; }
+.actinideo{ background:#7c3aed; }
+
+</style>
+</head>
+<body>
+
+<h1>Tabela Periódica Completa</h1>
+
+<div class="tabela" id="tabela"></div>
+
+<script>
+
+const elementos = [
+
+{n:1,s:"H",nome:"Hidrogênio",c:"nao-metal",col:1,row:1},
+{n:2,s:"He",nome:"Hélio",c:"gas-nobre",col:18,row:1},
+
+{n:3,s:"Li",nome:"Lítio",c:"metal-alcalino",col:1,row:2},
+{n:4,s:"Be",nome:"Berílio",c:"metal-alcalino-terroso",col:2,row:2},
+{n:5,s:"B",nome:"Boro",c:"metaloide",col:13,row:2},
+{n:6,s:"C",nome:"Carbono",c:"nao-metal",col:14,row:2},
+{n:7,s:"N",nome:"Nitrogênio",c:"nao-metal",col:15,row:2},
+{n:8,s:"O",nome:"Oxigênio",c:"nao-metal",col:16,row:2},
+{n:9,s:"F",nome:"Flúor",c:"halogenio",col:17,row:2},
+{n:10,s:"Ne",nome:"Neônio",c:"gas-nobre",col:18,row:2},
+
+{n:11,s:"Na",nome:"Sódio",c:"metal-alcalino",col:1,row:3},
+{n:12,s:"Mg",nome:"Magnésio",c:"metal-alcalino-terroso",col:2,row:3},
+{n:13,s:"Al",nome:"Alumínio",c:"metal-transicao",col:13,row:3},
+{n:14,s:"Si",nome:"Silício",c:"metaloide",col:14,row:3},
+{n:15,s:"P",nome:"Fósforo",c:"nao-metal",col:15,row:3},
+{n:16,s:"S",nome:"Enxofre",c:"nao-metal",col:16,row:3},
+{n:17,s:"Cl",nome:"Cloro",c:"halogenio",col:17,row:3},
+{n:18,s:"Ar",nome:"Argônio",c:"gas-nobre",col:18,row:3},
+
+{n:19,s:"K",nome:"Potássio",c:"metal-alcalino",col:1,row:4},
+{n:20,s:"Ca",nome:"Cálcio",c:"metal-alcalino-terroso",col:2,row:4},
+{n:21,s:"Sc",nome:"Escândio",c:"metal-transicao",col:3,row:4},
+{n:22,s:"Ti",nome:"Titânio",c:"metal-transicao",col:4,row:4},
+{n:23,s:"V",nome:"Vanádio",c:"metal-transicao",col:5,row:4},
+{n:24,s:"Cr",nome:"Cromo",c:"metal-transicao",col:6,row:4},
+{n:25,s:"Mn",nome:"Manganês",c:"metal-transicao",col:7,row:4},
+{n:26,s:"Fe",nome:"Ferro",c:"metal-transicao",col:8,row:4},
+{n:27,s:"Co",nome:"Cobalto",c:"metal-transicao",col:9,row:4},
+{n:28,s:"Ni",nome:"Níquel",c:"metal-transicao",col:10,row:4},
+{n:29,s:"Cu",nome:"Cobre",c:"metal-transicao",col:11,row:4},
+{n:30,s:"Zn",nome:"Zinco",c:"metal-transicao",col:12,row:4},
+{n:31,s:"Ga",nome:"Gálio",c:"metal-transicao",col:13,row:4},
+{n:32,s:"Ge",nome:"Germânio",c:"metaloide",col:14,row:4},
+{n:33,s:"As",nome:"Arsênio",c:"metaloide",col:15,row:4},
+{n:34,s:"Se",nome:"Selênio",c:"nao-metal",col:16,row:4},
+{n:35,s:"Br",nome:"Bromo",c:"halogenio",col:17,row:4},
+{n:36,s:"Kr",nome:"Criptônio",c:"gas-nobre",col:18,row:4},
+
+{n:37,s:"Rb",nome:"Rubídio",c:"metal-alcalino",col:1,row:5},
+{n:38,s:"Sr",nome:"Estrôncio",c:"metal-alcalino-terroso",col:2,row:5},
+{n:39,s:"Y",nome:"Ítrio",c:"metal-transicao",col:3,row:5},
+{n:40,s:"Zr",nome:"Zircônio",c:"metal-transicao",col:4,row:5},
+{n:41,s:"Nb",nome:"Nióbio",c:"metal-transicao",col:5,row:5},
+{n:42,s:"Mo",nome:"Molibdênio",c:"metal-transicao",col:6,row:5},
+{n:43,s:"Tc",nome:"Tecnécio",c:"metal-transicao",col:7,row:5},
+{n:44,s:"Ru",nome:"Rutênio",c:"metal-transicao",col:8,row:5},
+{n:45,s:"Rh",nome:"Ródio",c:"metal-transicao",col:9,row:5},
+{n:46,s:"Pd",nome:"Paládio",c:"metal-transicao",col:10,row:5},
+{n:47,s:"Ag",nome:"Prata",c:"metal-transicao",col:11,row:5},
+{n:48,s:"Cd",nome:"Cádmio",c:"metal-transicao",col:12,row:5},
+{n:49,s:"In",nome:"Índio",c:"metal-transicao",col:13,row:5},
+{n:50,s:"Sn",nome:"Estanho",c:"metal-transicao",col:14,row:5},
+{n:51,s:"Sb",nome:"Antimônio",c:"metaloide",col:15,row:5},
+{n:52,s:"Te",nome:"Telúrio",c:"metaloide",col:16,row:5},
+{n:53,s:"I",nome:"Iodo",c:"halogenio",col:17,row:5},
+{n:54,s:"Xe",nome:"Xenônio",c:"gas-nobre",col:18,row:5}
+
+];
+
+const tabela = document.getElementById("tabela");
+
+elementos.forEach(el => {
+
+    const div = document.createElement("div");
+
+    div.className = `elemento ${el.c}`;
+
+    div.style.gridColumn = el.col;
+    div.style.gridRow = el.row;
+
+    div.innerHTML = `
+        <div class="numero">${el.n}</div>
+        <div class="simbolo">${el.s}</div>
+        <div class="nome">${el.nome}</div>
+    `;
+
+    tabela.appendChild(div);
+
+});
+
+</script>
+
+</body>
+</html>

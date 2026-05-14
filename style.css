@@ -1,0 +1,59 @@
+body{
+    font-family: Arial, sans-serif;
+    background: #111;
+    color: white;
+    text-align: center;
+}
+
+h1{
+    margin: 20px 0;
+}
+
+.tabela{
+    display: grid;
+    grid-template-columns: repeat(18, 70px);
+    gap: 5px;
+    justify-content: center;
+    padding: 20px;
+}
+
+.elemento{
+    width: 70px;
+    height: 70px;
+    border-radius: 10px;
+    padding: 5px;
+    box-sizing: border-box;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.elemento:hover{
+    transform: scale(1.1);
+}
+
+.numero{
+    font-size: 12px;
+    text-align: left;
+}
+
+.simbolo{
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.nome{
+    font-size: 10px;
+}
+
+/* cores */
+.nao-metal{
+    background: #27ae60;
+}
+
+.gas-nobre{
+    background: #8e44ad;
+}
+
+.metal-alcalino{
+    background: #e67e22;
+}
